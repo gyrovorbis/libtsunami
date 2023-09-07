@@ -100,16 +100,18 @@ void Drawable::subRemove(Drawable *t) {
 }
 
 void Drawable::subRemoveFinished() {
-	for (auto it = m_subs.begin(); it != m_subs.end(); it++) {
+	for (auto it = m_subs.begin(); it != m_subs.end();) {
 		if (!(*it)->isFinished()) {
 			(*it)->m_parent = nullptr;
 			it = m_subs.erase(it);
+		} else {
+			it++;
 		}
 	}
 }
 
 void Drawable::subRemoveAll() {
-	for (auto it = m_subs.begin(); it != m_subs.end(); it++) {
+	for (auto it = m_subs.begin(); it != m_subs.end();) {
 		(*it)->m_parent = nullptr;
 		it = m_subs.erase(it);
 	}
